@@ -19,12 +19,11 @@ const useGetUserId = (email) => {
       getDocs(q).then((data) => {
         if (!data.empty) {
           const user = data.docs[0];
-
           setUserDbId(user.id);
-
           const sites = user.data()?.sites || [];
-
           setUserSites(sites);
+          setLoading(false);
+        } else {
           setLoading(false);
         }
       });
