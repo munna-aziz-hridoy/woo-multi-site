@@ -25,6 +25,7 @@ const useGetProducts = (shop) => {
           per_page: 20,
         })
         .then((response) => {
+          console.log(response);
           setLoading(false);
           if (response?.data) {
             const formatedProducts = response?.data?.map((product) =>
@@ -33,6 +34,14 @@ const useGetProducts = (shop) => {
 
             setProducts(formatedProducts);
           }
+        })
+        .catch((err) => {
+          setLoading(false);
+          setProducts([]);
+          console.log(err.message);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }, [shop, refetch]);
